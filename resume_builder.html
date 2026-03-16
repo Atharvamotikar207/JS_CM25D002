@@ -1,0 +1,112 @@
+
+<html>
+<head>
+  <title>Resume Builder</title>
+  <style>
+    body {
+      font-family: Times New Roman , sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .resume-output {
+      margin-top: 30px;
+      border-top: 2px solid #333;
+      padding-top: 20px;
+    }
+    .resume-output h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Resume Builder</h1>
+
+<form id="resumeForm">
+  <label for="name">Full Name</label>
+  <input type="text" id="name" required>
+
+  <label for="phone">Phone Number</label>
+  <input type="text" id="phone" required>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" required>
+
+  <label for="address">Address</label>
+  <input type="text" id="address" required>
+
+  <label for="education">Educational Qualification</label>
+  <input type="text" id="education" required>
+
+  <label for="experience">Work Experience (optional)</label>
+  <textarea id="experience" rows="3"></textarea>
+
+  <button type="button" onclick="generateResume()">Generate Resume</button>
+</form>
+
+<div class="resume-output" id="resumeOutput" style="display:none;">
+  <h2>Your Resume</h2>
+  <p><strong>Name:</strong> <span id="resName"></span></p>
+  <p><strong>Phone:</strong> <span id="resPhone"></span></p>
+  <p><strong>Email:</strong> <span id="resEmail"></span></p>
+  <p><strong>Address:</strong> <span id="resAddress"></span></p>
+  <p><strong>Education:</strong> <span id="resEducation"></span></p>
+  <p id="resExperienceLine" style="display:none;"><strong>Work Experience:</strong> <span id="resExperience"></span></p>
+</div>
+
+<script>
+  function generateResume() {
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const address = document.getElementById('address').value;
+    const education = document.getElementById('education').value;
+    const experience = document.getElementById('experience').value;
+
+    if (!name || !phone || !email || !address || !education) {
+      alert('Please fill out all required fields.');
+      return;
+    }
+
+    document.getElementById('resName').innerText = name;
+    document.getElementById('resPhone').innerText = phone;
+    document.getElementById('resEmail').innerText = email;
+    document.getElementById('resAddress').innerText = address;
+    document.getElementById('resEducation').innerText = education;
+
+    if (experience.trim() !== "") {
+      document.getElementById('resExperienceLine').style.display = "block";
+      document.getElementById('resExperience').innerText = experience;
+    } else {
+      document.getElementById('resExperienceLine').style.display = "none";
+    }
+
+    document.getElementById('resumeOutput').style.display = "block";
+    window.scrollTo(0, document.getElementById('resumeOutput').offsetTop);
+  }
+</script>
+
+</body>
+</html>
